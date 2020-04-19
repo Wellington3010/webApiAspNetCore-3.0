@@ -61,6 +61,7 @@ namespace WebAPICategoriasProdutos.Controllers
                 await Response.WriteAsync("Erro ao cadastrar. Verifique se os dados da requisição estão corretos.");
                 Response.StatusCode = 400;
                 return Response;
+                
             }
 
         }
