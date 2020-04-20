@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 namespace WebAPICategoriasProdutos
 {
@@ -76,6 +78,36 @@ namespace WebAPICategoriasProdutos
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
                 });
+
+            services.AddApiVersioning(options =>
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
+            });
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo()
+                {
+
+                    Version = "v1",
+                    Title = "ApiCatalogo",
+                    Description = "Catálogo de produtos e categoria",
+                    TermsOfService = new Uri("https://terms.api.io"),
+                    Contact = new OpenApiContact()
+                    {
+                        Email = "wellington3010@gmail.com",
+                        Name = "Wellington",
+                        Url = new Uri("https://well.com.br")
+                    },
+                    License = new OpenApiLicense()
+                    {
+                        Name = "MIT",
+                        Url = new Uri("https://mit.gov.us")
+                    }
+                
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +127,15 @@ namespace WebAPICategoriasProdutos
             app.UseAuthentication();
 
             app.UseCors();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catálogo de produtos e categorias");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "Catálogo de produtos e categorias");
+
+            });
 
             app.UseEndpoints(endpoints =>
             {
