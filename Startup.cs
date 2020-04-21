@@ -21,6 +21,8 @@ using System.Text;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace WebAPICategoriasProdutos
 {
@@ -105,8 +107,12 @@ namespace WebAPICategoriasProdutos
                         Name = "MIT",
                         Url = new Uri("https://mit.gov.us")
                     }
-                
+
                 });
+
+                var XmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var XmlPath = Path.Combine(AppContext.BaseDirectory, XmlFile);
+                c.IncludeXmlComments(XmlPath);
             });
         }
 
