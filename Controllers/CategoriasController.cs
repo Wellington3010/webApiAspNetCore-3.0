@@ -48,6 +48,20 @@ namespace WebAPICategoriasProdutos.Controllers
         }
 
 
+        /// <summary>
+        /// Realiza o cadastro de uma nova categoria
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request
+        /// Post Categorias/cadastrar
+        /// {
+        ///     "ImageUrl":"https://images.com.br",
+        ///     "Nome":"Nome da categoria"
+        /// 
+        /// }
+        /// </remarks>
+        /// <param name="model">Objeto Json categoria</param>
+        /// <returns>HttpResponse</returns>
         [HttpPost]
         [Route("cadastrar")]
         public async Task<HttpResponse> CadastrarCategoria([FromBody] Categoria model)
