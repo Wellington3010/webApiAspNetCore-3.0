@@ -9,21 +9,23 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using System.Web.Http.Results;
 using Microsoft.AspNetCore.Cors;
+using System.Collections.Generic;
 
 namespace WebAPICategoriasProdutos.Controllers
 {
-    [Route("ApiProdutos")]
+    [Route("Produtos")]
     [ApiController]
+    [Produces("application/json")]
     public class ProdutosController : ControllerBase
     {
         [HttpGet]
         [Route("ListarProdutos")]
         [EnableCors("DefaultCors")]
-        public async Task<ActionResult<string>> GetProdutos([FromServices] DataContext ctx)
+        public async Task<List<Produto>> GetProdutos([FromServices] DataContext ctx)
         {
             
-             var json =  JsonConvert.SerializeObject(await ctx.Produtos.ToListAsync(),Formatting.Indented);
-             return json;
+             var retorno =  await ctx.Produtos.ToListAsync();
+             return retorno;
 
         }
 

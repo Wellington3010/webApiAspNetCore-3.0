@@ -12,27 +12,46 @@ using WebAPICategoriasProdutos.Models;
 
 namespace WebAPICategoriasProdutos.Controllers
 {
+    /// <summary>
+    /// Categorias
+    /// </summary>
     [Route("Categorias")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Produces("application/json")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     public class CategoriasController : ControllerBase
     {
 
 
         private readonly DataContext ctx;
 
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
+        /// <param name="context"></param>
         public CategoriasController(DataContext context)
         {
             ctx = context;
         }
 
+        /// <summary>
+        /// Lista de categorias
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// Exemplo de request
+        /// 
+        /// GET Categorias/ListarCategorias
+        /// 
+        /// </remarks>
+        /// <returns>ActionResult</returns>
         [HttpGet]
         [Route("ListarCategorias")]
-        public async Task<ActionResult<string>> GetCategorias()
+        public async Task<List<Categoria>> GetCategorias()
         {
 
-            var json = JsonConvert.SerializeObject(await ctx.Categorias.ToListAsync(), Formatting.Indented);
-            return json;
+            var retorno = await ctx.Categorias.ToListAsync();
+            return retorno;
 
         }
 
@@ -52,23 +71,27 @@ namespace WebAPICategoriasProdutos.Controllers
         /// Realiza o cadastro de uma nova categoria
         /// </summary>
         /// <remarks>
+        /// 
         /// Exemplo de request
-        /// Post Categorias/cadastrar
+        /// 
+        /// POST Categorias/cadastrar
         /// {
+        ///     
+        ///     "CategoriaId":1,
         ///     "ImageUrl":"https://images.com.br",
         ///     "Nome":"Nome da categoria"
         /// 
         /// }
         /// </remarks>
-        /// <param name="model">Objeto Json categoria</param>
+        /// <param name="categoria">Objeto Json categoria</param>
         /// <returns>HttpResponse</returns>
         [HttpPost]
         [Route("cadastrar")]
-        public async Task<HttpResponse> CadastrarCategoria([FromBody] Categoria model)
+        public async Task<HttpResponse> CadastrarCategoria([FromBody] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                ctx.Categorias.Add(model);
+                ctx.Categorias.Add(categoria);
 
                 await ctx.SaveChangesAsync();
 

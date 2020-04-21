@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAPICategoriasProdutos</name>
+    </assembly>
+    <members>
+        <member name="M:WebAPICategoriasProdutos.Controllers.CategoriasController.CadastrarCategoria(WebAPICategoriasProdutos.Models.Categoria)">
+            <summary>
+            Realiza o cadastro de uma nova categoria
+            </summary>
+            <remarks>
+            Exemplo de request
+            Post Categorias/cadastrar
+            {
+                "ImageUrl":"https://images.com.br",
+                "Nome":"Nome da categoria"
+            
+            }
+            </remarks>
+            <param name="model">Objeto Json categoria</param>
+            <returns>HttpResponse</returns>
+        </member>
+        <member name="T:WebAPICategoriasProdutos.Models.Categoria">
+            <summary>
+            Entidade Categoria
+            </summary>
+        </member>
+        <member name="M:WebAPICategoriasProdutos.Models.Categoria.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="P:WebAPICategoriasProdutos.Models.Categoria.CategoriaId">
+            <summary>
+            Primary key da entidade categoria
+            </summary>
+        </member>
+    </members>
+</doc>

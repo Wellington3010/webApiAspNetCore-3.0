@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using WebAPICategoriasProdutos.DTOs;
+using WebAPICategoriasProdutos.Models;
 
 namespace WebAPICategoriasProdutos.Controllers
 {
@@ -46,7 +47,7 @@ namespace WebAPICategoriasProdutos.Controllers
                 return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
             }
 
-
+           
             var user = new IdentityUser()
             {
                 UserName = model.Email,
