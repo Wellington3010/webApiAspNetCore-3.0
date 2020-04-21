@@ -18,7 +18,7 @@ namespace WebAPICategoriasProdutos.Controllers
     [Route("Categorias")]
     [ApiController]
     [Produces("application/json")]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CategoriasController : ControllerBase
     {
 
