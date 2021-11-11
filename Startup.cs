@@ -110,9 +110,11 @@ namespace WebAPICategoriasProdutos
 
                 });
 
-                var XmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var XmlPath = Path.Combine(AppContext.BaseDirectory, XmlFile);
-                c.IncludeXmlComments(XmlPath);
+                // Rethink later
+
+                //var XmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var XmlPath = Path.Combine(AppContext.BaseDirectory, XmlFile);
+                //c.IncludeXmlComments(XmlPath);
             });
         }
 
